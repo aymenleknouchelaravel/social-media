@@ -78,8 +78,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 3- php artisan migrate
 4- npm install
 5- npm run dev
+6- php artisan make:model Post -mcrf
 
- -->
+-->
 
 
 
@@ -91,6 +92,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 3- Ui Avatars library for default profil picture from the first letter of the name and username
 
+-->
 
+<!-- steps
 
-  -->
+1- auth
+
+2- create database
+
+3- relationships
+
+-->
