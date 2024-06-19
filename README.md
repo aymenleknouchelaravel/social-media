@@ -80,3 +80,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 5- npm run dev
 
  -->
+
+
+
+ <!-- new things
+
+1- laravel breeze authentication
+
+2- in the validation rules , we use alpha_dash for username 
+
+3- Ui Avatars library for default profil picture from the first letter of the name and username
+
+
+
+  -->
