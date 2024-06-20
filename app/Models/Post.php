@@ -9,13 +9,19 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'description',
+        'slug',
+        'image',
+    ];
+
     public function owner()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::class , 'user_id');
+        return $this->hasMany(Comment::class, 'user_id');
     }
 }
