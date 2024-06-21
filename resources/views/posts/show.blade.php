@@ -19,7 +19,20 @@
                 <div class="flex items-center py-5">
                     <img src="{{ $post->owner->image }}" alt="{{ $post->owner->username }}"
                         class="mx-5 h-10 w-10 rounded-full">
-                    <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+                    <div class="grow">
+                        <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+                    </div>
+                    @if ($post->owner->id == auth()->id())
+                        <a href="/p/{{ $post->slug }}/edit"><i class='bx bxs-edit text-xl mr-3'></i></a>
+                    @endif
+
+                    <form action="/p/{{$post->slug}}/delete" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure ?')">
+                            <i class='bx bx-message-square-x mr-3 text-xl text-red-600'></i>
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -38,6 +51,7 @@
                 </div>
 
                 {{-- Comments --}}
+
                 @foreach ($post->comments as $comment)
                     <div class="flex items-strat px-5 mt-2">
                         <img src="{{ $comment->owner->image }}" alt="" class="h-10 mr-5 w-10 rounded-full">
@@ -63,7 +77,8 @@
                     @csrf
 
                     <div class="flex flex-row">
-                        <textarea name="body" id="comment-body" placeholder="Add a comment ..." cols="30" rows="10" class="h-5 grow resize-none overflow-hidden border-none p-0 placeholder-gray-400 outline-0 focus:ring-0"></textarea>
+                        <textarea name="body" id="comment-body" placeholder="Add a comment ..." cols="30" rows="10"
+                            class="h-5 grow resize-none overflow-hidden border-none p-0 placeholder-gray-400 outline-0 focus:ring-0"></textarea>
                         <button type="submit" class="ml-5 border-none bg-white text-blue-500">Post</button>
                     </div>
                 </form>
