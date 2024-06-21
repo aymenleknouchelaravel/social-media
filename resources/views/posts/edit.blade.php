@@ -21,6 +21,8 @@
 
         <form action="/p/{{ $post->slug }}/update" method="post" class="w-full" enctype="multipart/form-data">
             @csrf
+
+            @method('PATCH')
            
             <x-create-edit-form :post="$post" />
 
