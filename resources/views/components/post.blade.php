@@ -5,8 +5,12 @@
     </div>
 
     <div class="card-body">
+
         <div class="max-h-[35rem] overflow-hidden">
-            <img src="/storage/{{ $post->image }}" class="h-auto w-full object-cover" alt="{{ $post->description }}">
+            <a href="/p/{{ $post->slug }}/show">
+                <img src="/storage/{{ $post->image }}" class="h-auto w-full object-cover"
+                    alt="{{ $post->description }}">
+            </a>
         </div>
 
         <div class="p-3">
@@ -23,15 +27,16 @@
         <div class="p-3 text-gray-400 uppercase text-xs">
             {{ $post->created_at->diffForHumans() }}
         </div>
+
     </div>
 
     <div class="card-footer">
-        <form action="/p/{{$post->slug}}/comment" method="post">
+        <form action="/p/{{ $post->slug }}/comment" method="post">
             @csrf
             <div class="flex flex-row">
-                <textarea autocomplete="off" name="body" placeholder="{{__('Add a comment ...')}}"
-                class="grow border-none resize-none focus:ring-0 outline-0 bg-none max-h-60 h-5 p-0 overflow-y-hidden placeholder-gray-400"></textarea>
-                <button type="submit" class="bg-white border-none text-blue-500 ml-5">{{__('POST')}}</button>
+                <textarea autocomplete="off" name="body" placeholder="{{ __('Add a comment ...') }}"
+                    class="grow border-none resize-none focus:ring-0 outline-0 bg-none max-h-60 h-5 p-0 overflow-y-hidden placeholder-gray-400"></textarea>
+                <button type="submit" class="bg-white border-none text-blue-500 ml-5">{{ __('POST') }}</button>
             </div>
         </form>
     </div>

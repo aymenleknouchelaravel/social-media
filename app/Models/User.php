@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function suggested_users()
+    {
+        return User::whereNot('id', auth()->id())->get()->shuffle()->take(5);
+    }
 }
