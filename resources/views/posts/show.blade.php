@@ -24,15 +24,16 @@
                     </div>
                     @if ($post->owner->id == auth()->id())
                         <a href="/p/{{ $post->slug }}/edit"><i class='bx bxs-edit text-xl mr-3'></i></a>
+                        <form action="/p/{{ $post->slug }}/delete" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure ?')">
+                                <i class='bx bx-message-square-x mr-3 text-xl text-red-600'></i>
+                            </button>
+                        </form>
                     @endif
 
-                    <form action="/p/{{$post->slug}}/delete" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure ?')">
-                            <i class='bx bx-message-square-x mr-3 text-xl text-red-600'></i>
-                        </button>
-                    </form>
+
                 </div>
             </div>
 
