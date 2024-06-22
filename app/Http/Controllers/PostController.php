@@ -117,6 +117,14 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect(url('home'));
+        return redirect("/");
+    }
+
+    public function explore()
+    {
+        $posts = Post::whereRelation("owner", "private_account", "=", 0)
+            ->whereNot("user_id", auth()->id())
+            ->simplePaginate(15);
+        return view('posts.explore', compact('posts'));
     }
 }
