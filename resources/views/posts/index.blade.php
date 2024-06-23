@@ -11,6 +11,9 @@
                     {{ __('Start Following Your Friends and Enjoy.') }}
                 </div>
             @endforelse
+            <div class="p-5">
+                {{ $posts->links() }}
+            </div>
         </div>
 
         {{-- right side --}}
@@ -18,13 +21,14 @@
         <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4">
             <div class="flex flex-row text-sm">
                 <div class="mr-5">
-                    <a href="/{{ auth()->user()->username }}">
+                    <a href="/profile/{{ auth()->user()->username }}">
                         <img src="{{ auth()->user()->image }}" alt="{{ auth()->user()->username }}"
                             class="border border-gray-300 rounded-full h-12 w-12">
                     </a>
                 </div>
                 <div class="flex flex-col">
-                    <a href="/{{ auth()->user()->username }}" class="font-bold">{{ auth()->user()->username }}</a>
+                    <a href="/profile/{{ auth()->user()->username }}"
+                        class="font-bold">{{ auth()->user()->username }}</a>
                     <div class="text-gray-500 text-sm">{{ auth()->user()->name }}</div>
                 </div>
             </div>
@@ -38,7 +42,7 @@
                                     class="rounded-full h-9 w-9 border border-gray-300" />
                             </div>
                             <div class="flex flex-col grow">
-                                <a href="/{{ $suggested_user->username }}"
+                                <a href="/profile/{{ $suggested_user->username }}"
                                     class="font-bold">{{ $suggested_user->username }}
                                 </a>
                                 <div class="text-gray-500 text-sm">{{ $suggested_user->name }}</div>

@@ -2,7 +2,7 @@
     <div class="grid grid-cols-3 gap-1 ms:gap-5 mt-8">
         @foreach ($posts as $post)
             <div>
-                <a href="/p/{{ $post->slug }}">
+                <a href="/p/{{ $post->slug }}/show">
                     <img src="/storage/{{ $post->image }}" alt="image" class="w-full aspect-square object-cover">
                 </a>
             </div>

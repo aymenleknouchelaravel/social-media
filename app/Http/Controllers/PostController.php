@@ -16,10 +16,16 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function bb()
+    {
+        
+        return "bb";
+    }
+
     public function index()
     {
         $suggested_users = auth()->user()->suggested_users();
-        $posts = Post::all();
+        $posts = Post::simplePaginate(10);
         return view('posts.index', compact('posts', 'suggested_users'));
     }
 

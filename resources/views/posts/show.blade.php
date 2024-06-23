@@ -20,7 +20,7 @@
                     <img src="{{ $post->owner->image }}" alt="{{ $post->owner->username }}"
                         class="mx-5 h-10 w-10 rounded-full">
                     <div class="grow">
-                        <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+                        <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
                     </div>
                     @if ($post->owner->id == auth()->id())
                         <a href="/p/{{ $post->slug }}/edit"><i class='bx bxs-edit text-xl mr-3'></i></a>
@@ -46,7 +46,7 @@
                 <div class="flex items-start px-5 mb-5">
                     {{-- <img src="{{ $post->owner->image }}" class="mr-5 h-10 w-10 rounded-full"> --}}
                     <div>
-                        <a href="{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+                        <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
                         {{ $post->description }}
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         <img src="{{ $comment->owner->image }}" alt="" class="h-10 mr-5 w-10 rounded-full">
                         <div class="flex flex-col">
                             <div>
-                                <a href="/{{ $comment->owner->username }}"
+                                <a href="/profile/{{ $comment->owner->username }}"
                                     class="font-bold">{{ $comment->owner->username }}</a>
                                 {{ $comment->body }}
                             </div>

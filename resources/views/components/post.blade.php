@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <img src="{{ $post->owner->image }}" alt="" class="w-9 h-9 mr-3 rounded-full">
-        <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+        <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
     </div>
 
     <div class="card-body">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="p-3">
-            <a href="/{{ $post->owner->username }}" class="font-bold mr-1">{{ $post->owner->username }}</a>
+            <a href="/profile/{{ $post->owner->username }}" class="font-bold mr-1">{{ $post->owner->username }}</a>
             {{ $post->description }}
         </div>
 
