@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profil/edit/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/{user:username}/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
@@ -40,4 +40,3 @@ Route::controller(PostController::class)->middleware("auth")->group(function () 
 
 Route::post('/p/{post:slug}/comment', [CommentController::class, 'store'])->name('store_post')->middleware("auth");
 
-require __DIR__ . '/auth.php';

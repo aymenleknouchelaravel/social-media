@@ -21,27 +21,36 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(User $user): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return view('user.edit', compact("user"));
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, User $user): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $data = $request->safe()->collect();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($data['password'] == '') {
+            unset($data['password']);
+        } else {
+            $data['password'] = encrypt($data['password']);
         }
 
-        $request->user()->save();
+        if ($data->has('image')) {
+            $path = $request->file('image')->store('users', 'public');
+            $data['image'] = '/' . $path;
+        }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $data['private_account'] = $request->has('private_account');
+
+        $user->update($data->toArray());
+
+        session()->flash("success" , __('Your profile has been updated!'));
+
+        return redirect()->route('profile.show', $user);
     }
 
     /**

@@ -1,6 +1,10 @@
 <div class="card">
     <div class="card-header">
-        <img src="{{ $post->owner->image }}" alt="" class="w-9 h-9 mr-3 rounded-full">
+        @if (filter_var($post->owner->image, FILTER_VALIDATE_URL))
+            <img src="{{ $post->owner->image }}" alt="" class="w-9 h-9 mr-3 rounded-full">
+        @else
+            <img src="{{ asset('storage/' . $post->owner->image) }}" alt="" class="w-9 h-9 mr-3 rounded-full">
+        @endif
         <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
     </div>
 

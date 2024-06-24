@@ -17,10 +17,16 @@
 
             <div class="border-b">
                 <div class="flex items-center py-5">
-                    <img src="{{ $post->owner->image }}" alt="{{ $post->owner->username }}"
-                        class="mx-5 h-10 w-10 rounded-full">
+                    @if (filter_var($post->owner->image, FILTER_VALIDATE_URL))
+                        <img src="{{ $post->owner->image }}" alt="{{ $post->owner->username }}"
+                            class="mx-5 h-10 w-10 rounded-full">
+                    @else
+                        <img src="{{ asset('storage/' . $post->owner->image) }}" alt="{{ $post->owner->username }}"
+                            class="mx-5 h-10 w-10 rounded-full">
+                    @endif
                     <div class="grow">
-                        <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+                        <a href="/profile/{{ $post->owner->username }}"
+                            class="font-bold">{{ $post->owner->username }}</a>
                     </div>
                     @if ($post->owner->id == auth()->id())
                         <a href="/p/{{ $post->slug }}/edit"><i class='bx bxs-edit text-xl mr-3'></i></a>
@@ -32,8 +38,6 @@
                             </button>
                         </form>
                     @endif
-
-
                 </div>
             </div>
 
@@ -46,7 +50,8 @@
                 <div class="flex items-start px-5 mb-5">
                     {{-- <img src="{{ $post->owner->image }}" class="mr-5 h-10 w-10 rounded-full"> --}}
                     <div>
-                        <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
+                        <a href="/profile/{{ $post->owner->username }}"
+                            class="font-bold">{{ $post->owner->username }}</a>
                         {{ $post->description }}
                     </div>
                 </div>

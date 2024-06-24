@@ -1,11 +1,19 @@
 <x-app-layout>
     <div class="grid grid-cols-4 card pt-10">
+        <div class="{{ session('success') ? '' : 'hidden' }} w-50 p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg absolute right-10 shadow shadow-neutral-200"
+            role="alert">
+            <span class="font-medium">{{ session('success') }}</span>
+        </div>
 
         {{-- User Image --}}
 
         <div class="px-4 col-span-1 order-1">
-            <img src="{{ $user->image }}" alt="{{ $user->username }} Profile Image"
-                class="rounded-full w-20 md:w-40 border border-neutral-300">
+
+
+            <img src="{{ Str::startsWith($user->image, ['http://', 'https://']) ? $user->image : asset('storage/' . $user->image) }}"
+                alt="{{ $user->username }} Profile Image" class="rounded-full w-20 md:w-40 border border-neutral-300">
+
+
         </div>
 
         {{-- Username and Buttons --}}
@@ -15,7 +23,7 @@
                 {{ $user->username }}
             </div>
             @if ($user->id == auth()->id())
-                <a href="/{{ $user->username }}/edit"
+                <a href="/profil/edit/{{ $user->id }}"
                     class="w-44 border text-sm font-bold py-1 rounded-md border-neutral-300 text-center">
                     {{ __('Edit Profile') }}
                 </a>
@@ -48,17 +56,14 @@
     </div>
 
     {{-- Bottom --}}
-
-    @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->user() == $user->id))
+    @if ($user->posts()->count() > 0 && (!$user->private_account || auth()->id() == $user->id))
         <div class="grid grid-cols-3 gap-1 pb-5">
 
             @foreach ($user->posts as $post)
-
                 <a href="/p/{{ $post->slug }}/show" class="aspect-square block w-full">
                     <img src="/storage/{{ $post->image }}" alt="{{ $post->description }}"
                         class="w-full aspect-square object-cover">
                 </a>
-                
             @endforeach
 
         </div>

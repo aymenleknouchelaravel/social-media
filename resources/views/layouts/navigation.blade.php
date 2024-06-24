@@ -40,7 +40,12 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <div>
-                            <img src="{{ auth()->user()->image }}" class="w-6 h-6 rounded-full" alt="">
+                            @if (filter_var(auth()->user()->image, FILTER_VALIDATE_URL))
+                                <img src="{{ auth()->user()->image }}" class="w-6 h-6 rounded-full" alt="">
+                            @else
+                                <img src="{{ asset('storage/' . auth()->user()->image) }}" class="w-6 h-6 rounded-full"
+                                    alt="">
+                            @endif
                         </div>
                     </x-slot>
 
@@ -95,7 +100,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-responsive-nav-link :href="route('profile.show', auth()->user())">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 

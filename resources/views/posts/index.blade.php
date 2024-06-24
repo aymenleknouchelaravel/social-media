@@ -22,8 +22,15 @@
             <div class="flex flex-row text-sm">
                 <div class="mr-5">
                     <a href="/profile/{{ auth()->user()->username }}">
-                        <img src="{{ auth()->user()->image }}" alt="{{ auth()->user()->username }}"
-                            class="border border-gray-300 rounded-full h-12 w-12">
+                        @if (filter_var(auth()->user()->image, FILTER_VALIDATE_URL))
+                            <img src="{{ auth()->user()->image }}" alt="{{ auth()->user()->username }}"
+                                class="border border-gray-300 rounded-full h-12 w-12">
+                        @else
+                            <img src="{{ asset('storage/' . auth()->user()->image) }}"
+                                alt="{{ auth()->user()->username }}"
+                                class="border border-gray-300 rounded-full h-12 w-12">
+                        @endif
+
                     </a>
                 </div>
                 <div class="flex flex-col">
