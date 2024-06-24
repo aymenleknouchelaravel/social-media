@@ -60,7 +60,12 @@
 
                 @foreach ($post->comments as $comment)
                     <div class="flex items-strat px-5 mt-2">
-                        <img src="{{ $comment->owner->image }}" alt="" class="h-10 mr-5 w-10 rounded-full">
+                        @if (filter_var($comment->owner->image, FILTER_VALIDATE_URL))
+                            <img src="{{ $comment->owner->image }}" alt="" class="h-10 mr-5 w-10 rounded-full">
+                        @else
+                            <img src="{{ asset('storage/' . $comment->owner->image) }}" alt=""
+                                class="h-10 mr-5 w-10 rounded-full">
+                        @endif
                         <div class="flex flex-col">
                             <div>
                                 <a href="/profile/{{ $comment->owner->username }}"
