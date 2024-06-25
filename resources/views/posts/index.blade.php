@@ -45,8 +45,14 @@
                     @foreach ($suggested_users as $suggested_user)
                         <li class="flex flex-row my-5 text-sm justify-items-center">
                             <div class="mr-5">
-                                <img src="{{ $suggested_user->image }}"
-                                    class="rounded-full h-9 w-9 border border-gray-300" />
+                                @if (filter_var($suggested_user->image, FILTER_VALIDATE_URL))
+                                    <img src="{{ $suggested_user->image }}"
+                                        class="rounded-full h-9 w-9 border border-gray-300" />
+                                @else
+                                    <img src="{{ asset('storage/' . $suggested_user->image) }}"
+                                        class="rounded-full h-9 w-9 border border-gray-300" />
+                                @endif
+
                             </div>
                             <div class="flex flex-col grow">
                                 <a href="/profile/{{ $suggested_user->username }}"

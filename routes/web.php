@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +40,5 @@ Route::controller(PostController::class)->middleware("auth")->group(function () 
 });
 
 Route::post('/p/{post:slug}/comment', [CommentController::class, 'store'])->name('store_post')->middleware("auth");
+Route::get('/p/{post:slug}/like', LikeController::class)->middleware("auth");
 

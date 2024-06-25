@@ -18,6 +18,16 @@
         </div>
 
         <div class="p-3">
+            <a href="/p/{{ $post->slug }}/like">
+                @if ($post->liked(auth()->user()))
+                    <i class='bx bxs-heart text-red-600 text-3xl cursor-pointer mr-3'></i>
+                @else
+                    <i class='bx bx-heart text-3xl cursor-pointer mr-3'></i>
+                @endif
+            </a>
+        </div>
+
+        <div class="px-3">
             <a href="/profile/{{ $post->owner->username }}" class="font-bold mr-1">{{ $post->owner->username }}</a>
             {{ $post->description }}
         </div>
