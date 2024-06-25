@@ -27,7 +27,11 @@
                     <div class="grow">
                         <a href="/profile/{{ $post->owner->username }}"
                             class="font-bold">{{ $post->owner->username }}</a>
+                        @if (auth()->user()->is_follower($post->owner))
+                            <span class="text-gray-500 text-sm pl-4">{{ __('Follower') }}</span>
+                        @endif
                     </div>
+
                     @if ($post->owner->id == auth()->id())
                         <a href="/p/{{ $post->slug }}/edit"><i class='bx bxs-edit text-xl mr-3'></i></a>
                         <form action="/p/{{ $post->slug }}/delete" method="post">

@@ -60,8 +60,12 @@
                                 </a>
                                 <div class="text-gray-500 text-sm">{{ $suggested_user->name }}</div>
                             </div>
-                            <a href="/{{ $suggested_user->username }}/follow"
-                                class="text-blue-500 font-bold">{{ __('Follow') }}</a>
+                            @if (auth()->user()->is_pending($suggested_user))
+                                <span class="text-gray-500 font-bold">{{ __('Pending') }}</span>
+                            @else
+                                <a href="/{{ $suggested_user->username }}/follow"
+                                    class="text-blue-500 font-bold">{{ __('Follow') }}</a>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
