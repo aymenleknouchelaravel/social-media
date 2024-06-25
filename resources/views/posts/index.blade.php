@@ -60,6 +60,8 @@
                                 </a>
                                 <div class="text-gray-500 text-sm">{{ $suggested_user->name }}</div>
                             </div>
+                            <a href="/{{ $suggested_user->username }}/follow"
+                                class="text-blue-500 font-bold">{{ __('Follow') }}</a>
                         </li>
                     @endforeach
                 </ul>

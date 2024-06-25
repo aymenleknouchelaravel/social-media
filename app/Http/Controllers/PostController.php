@@ -11,21 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function bb()
-    {
-        
-        return "bb";
-    }
-
     public function index()
     {
         $suggested_users = auth()->user()->suggested_users();
-        $posts = Post::simplePaginate(10);
+        // $posts = Post::simplePaginate(10);
+        $ids = auth()->user()->following()->wherePivot('confirmed', true)->get()->pluck('id');
+        $posts = Post::whereIn('user_id', $ids)->latest()->simplePaginate(10);
         return view('posts.index', compact('posts', 'suggested_users'));
     }
 
