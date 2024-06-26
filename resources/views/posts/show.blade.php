@@ -29,6 +29,9 @@
                             class="font-bold">{{ $post->owner->username }}</a>
                         @if (auth()->user()->is_follower($post->owner))
                             <span class="text-gray-500 text-sm pl-4">{{ __('Follower') }}</span>
+                        @else
+                            <a href="/{{ $post->owner->username }}/follow"
+                                class="w-30 bg-blue-400 text-white px-3 py-1 rounded text-center self-start ml-3">{{ __('Follow') }}</a>
                         @endif
                     </div>
 

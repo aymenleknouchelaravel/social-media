@@ -6,9 +6,8 @@
             <img src="{{ asset('storage/' . $post->owner->image) }}" alt="" class="w-9 h-9 mr-3 rounded-full">
         @endif
         <a href="/profile/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
-        @if (auth()->user()->is_follower($post->owner))
-            <span class="text-gray-500 text-sm pl-4">{{ __('Follower') }}</span>
-        @endif
+       
+        
     </div>
 
     <div class="card-body">
