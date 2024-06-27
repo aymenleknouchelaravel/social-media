@@ -103,6 +103,21 @@
                 <x-responsive-nav-link :href="route('profile.show', auth()->user())">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+                @auth
+                    <x-responsive-nav-link :href="route('home_page')">
+                        {{ __('Home') }}
+                    </x-responsive-nav-link>
+                @endauth
+                <a href="{{ route('explore') }}">
+                    <x-responsive-nav-link :href="route('explore')">
+                        {{ __('Explore') }}
+                    </x-responsive-nav-link>
+                </a>
+                @auth
+                    <x-responsive-nav-link :href="route('create_post')">
+                        {{ __('Create Post') }}
+                    </x-responsive-nav-link>
+                @endauth
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

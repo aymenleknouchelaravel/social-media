@@ -23,6 +23,9 @@ class ProfileController extends Controller
      */
     public function edit(User $user): View
     {
+        // abort_if(auth()->user() != $user, 403 , 'YOU ARE NOT AUTHORIZED TO SEE THIS PAGE');
+        // abort_if(auth()->user()->cannot('edit-update-profile', $user), 403);
+        $this->authorize('edit-update-profile', $user);
         return view('user.edit', compact("user"));
     }
 
@@ -48,7 +51,7 @@ class ProfileController extends Controller
 
         $user->update($data->toArray());
 
-        session()->flash("success" , __('Your profile has been updated!'));
+        session()->flash("success", __('Your profile has been updated!'));
 
         return redirect()->route('profile.show', $user);
     }

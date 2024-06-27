@@ -80,6 +80,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 5- npm run dev
 6- php artisan make:model Post -mcrf
 7- php artisan make:component Post 
+8- php artisan make:policy PostPolicy --model=Post
 
 -->
 
@@ -106,5 +107,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 3- relationships
 
 4- ui and functions
+
+5- authorisations
 
 -->
